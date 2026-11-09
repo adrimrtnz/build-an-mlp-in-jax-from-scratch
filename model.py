@@ -139,8 +139,15 @@ def loss_fn_of_params(params, x, one_hot_targets):
     logits = mlp_forward(params, x)
     return cross_entropy_loss(logits, one_hot_targets)
 
-# Step 17 - compute_param_grads (not yet solved)
-# TODO: implement
+# Step 17 - compute_param_grads
+import jax
+import jax.numpy as jnp
+
+def compute_param_grads(params, x, one_hot_targets):
+    # return grad of loss_fn_of_params w.r.t. params using jax.grad
+    # loss = loss_fn_of_params(params, x, one_hot_targets)
+    grad = jax.grad(loss_fn_of_params,argnums=0)
+    return grad(params, x, one_hot_targets)
 
 # Step 18 - sgd_update_params (not yet solved)
 # TODO: implement
