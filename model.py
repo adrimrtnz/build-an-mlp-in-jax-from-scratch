@@ -105,8 +105,12 @@ def mlp_forward(params, x):
         x = relu_activation(x)
     return linear_forward(x, params[-1])
 
-# Step 13 - log_softmax_logits (not yet solved)
-# TODO: implement
+# Step 13 - log_softmax_logits
+def log_softmax_logits(logits):
+    # return the numerically stable log-softmax of logits along the last axis.
+    m = jnp.max(logits, axis=-1, keepdims=True)
+    log_sum_exp = m + jnp.log(jnp.exp(logits - m).sum(axis=-1, keepdims=True))
+    return logits - log_sum_exp
 
 # Step 14 - cross_entropy_loss (not yet solved)
 # TODO: implement
